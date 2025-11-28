@@ -1,27 +1,14 @@
-import express from "express";
-import passport from "passport";
-import dotenv from "dotenv";
-
-import sessionsRouter from "./routes/session.router.js";
+import { Router } from "express";
 import usersRouter from "./routes/users.router.js";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/carts.router.js";
+import sessionsRouter from "./routes/session.router.js";
 
-import initializePassport from "./config/passport.config.js";
+const router = Router();
 
-dotenv.config();
+router.use("/api/users", usersRouter);
+router.use("/api/products", productsRouter);
+router.use("/api/carts", cartsRouter);
+router.use("/api/sessions", sessionsRouter);
 
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-initializePassport();
-app.use(passport.initialize());
-
-app.use("/api/products", productsRouter);
-app.use("/api/sessions", sessionsRouter);
-app.use("/api/users", usersRouter);
-app.use("/api/carts",cartsRouter);
-
-export default app;
+export default router;

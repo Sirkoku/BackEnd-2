@@ -1,8 +1,11 @@
 import Cart from "../models/cart.model.js";
 
-class CartManager {
-    async createCart() {
-        return await Cart.create({ products: [] });
+export default class CartManager {
+    async createCart(userId) {
+        return await Cart.create({
+            owner: userId,
+            products: []
+        });
     }
 
     async getCartById(cid) {
@@ -45,5 +48,3 @@ class CartManager {
         return cart;
     }
 }
-
-export default new CartManager();

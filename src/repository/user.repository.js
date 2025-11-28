@@ -1,21 +1,12 @@
+
+import UserManager from "../dao/managers/userManager.js";
+const userManager = new UserManager();
+
 export default class UserRepository {
-  constructor(dao) {
-    this.dao = dao;
-  }
-
-  getUserByEmail = (email) => {
-    return this.dao.getUserByEmail(email);
-  };
-
-  getUserById = (id) => {
-    return this.dao.getUserById(id);
-  };
-
-  createUser = (user) => {
-    return this.dao.createUser(user);
-  };
-
-  updatePassword = (uid, newPassword) => {
-    return this.dao.updatePassword(uid, newPassword);
-  };
+  async getByEmail(email) { return await userManager.getByEmail(email); }
+  async getById(id) { return await userManager.getById(id); }
+  async create(userData) { return await userManager.create(userData); }
+  async update(id, data) { return await userManager.update(id, data); }
+  
 }
+export const userRepository = new UserRepository();

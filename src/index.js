@@ -1,20 +1,18 @@
-import app from "./app.js";
-import connectDB from "./config/db.js";
+import express from "express";
 import dotenv from "dotenv";
+import "./config/db.js";
+
+import router from "./app.js";
 
 dotenv.config();
 
-const PORT = process.env.PORT || 4000;
+const app = express();
 
-const startServer = async () => {
-try {
-    await connectDB();
-    app.listen(PORT, () => {
-    console.log(` Servidor funcionando en http://localhost:${PORT}`);
-    });
-} catch (error) {
-    console.error(" Error al iniciar el servidor:", error);
-}
-};
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-startServer();
+
+app.use("/", router);
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`SV en puerto ${PORT}`));

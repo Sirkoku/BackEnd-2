@@ -2,22 +2,22 @@ import productModel from "../models/product.model.js";
 
 export default class ProductManager {
     async getAll() {
-    return await productModel.find();
-}
+        return await productModel.find();
+    }
 
     async getById(id) {
-    return await productModel.findById(id);
-}
+        return await productModel.findById(id);
+    }
 
     async create(data) {
-    return await productModel.create(data);
-}
+        return await productModel.create(data);
+    }
 
     async update(id, data) {
-    return await productModel.findByIdAndUpdate(id, data, { new: true });
-}
+        return await productModel.findByIdAndUpdate(id, data, { new: true });
+    }
 
     async delete(id) {
-    return await productModel.findByIdAndDelete(id);
-}
+        return await productModel.findByIdAndDelete(id);
+    }
 }
